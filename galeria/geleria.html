@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Galeria</title>
+		<link rel="icon" href ="../ikona.png" type="image/x-icon">
+        <style>
+  :root {
+  --clr-neon: hsl(325 21% 56%);
+  --clr-bg: hsl(323 21% 16%);
+}
+  body
+{
+  background: var(--clr-bg);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+  .obraz
+{
+  width: 100px;
+  height: 100px;
+  background-size: 100% 100%;
+  border: var(--clr-neon) 0.125em solid;
+  transition-duration: 0.3s;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--clr-neon);
+  border: var(--clr-neon) 0.125em solid;
+  padding: 0.25em 1em;
+  border-radius: 0.25em;
+  box-shadow: inset 0 0 0.3em 0 var(--clr-neon), 0 0 0.8em 0 var(--clr-neon);
+}
+
+
+*::before
+{
+  box-sizing: border-box;
+}
+
+
+.obraz::before 
+{
+
+  content: "";
+  position: absolute;
+  background: var(--clr-neon);
+  top: 85%;
+  left: 16%;
+  right: 30%;
+  width: 49%;
+  height: 20%;
+  transform: perspective(3em) rotateX(30deg) scale(1, 0.35);
+  filter: blur(4em);
+  opacity: 0.05;
+
+
+}
+
+
+.obraz:hover,
+.obraz:focus 
+{
+  border: none;
+}
+
+
+
+  #okno
+{
+  position: absolute;
+  top: 200px;
+  left: 300px;
+  width: 900px;
+  height: 600px;
+  border: var(--clr-neon) 0.125em solid;
+  box-shadow: inset 0 0 3.5em 0 var(--clr-neon), 0 0 2.2em 0 var(--clr-neon);
+}
+        </style>
+        <script>
+            function start()
+            {
+                for(var i=1;i<6;i++)
+                    {
+                        newdiv = document.createElement('div');
+                        divIdName = 'image'+i;
+                        newdiv.setAttribute('id',divIdName);
+                        newdiv.setAttribute('class','obraz');
+                        newdiv.style.top=50+'px';
+                        newdiv.style.left=300+(100*i)+(i*30)+'px';
+                        newdiv.style.backgroundImage="url("+divIdName+".png)";
+                        newdiv.addEventListener('click',function(){open(this);});
+                        document.body.appendChild(newdiv);
+                    }
+            }
+            function open(x)
+            {
+                var zmienna=x.style.backgroundImage;
+                document.getElementById("okno").style.backgroundImage=zmienna;
+            }
+        </script>
+    </head>
+    <body onload="start()">
+        <div id="okno" style="background-image:url(image1.png);background-size: 100% 100%;"></div>
+    </body>
+</html>
