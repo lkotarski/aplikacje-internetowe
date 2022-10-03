@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Dzialania na divach</title>
+        
+        <style>
+  :root 
+{
+  --clr-neon: hsl(325 21% 56%);
+  --clr-bg: hsl(323 21% 16%);
+  --clr-bgkk: hsl(323 31% 26%);
+}
+
+            body
+            {
+                 background: var(--clr-bg);
+  color: var(--clr-neon);
+                width: 100%;
+                height: 100%;
+                margin: 0;
+				
+            }
+           
+            #form1
+            {
+			float:right;
+                
+                top: 100px;
+                left: 850px;
+                width: 500px;
+                height: 700px;             
+                color: white;
+                text-align: center;
+                font-weight: bold;
+            }
+            #button
+            {
+                position:absolute;
+                top: 50%;
+                left: 86%;
+            }
+            #div1
+            {
+position: absolute;
+top:200px;
+left:200px;
+height:500px;
+width:200px;
+border:solid 2px blue;
+background-color:white;
+text-align:center;
+font-weight:bold;
+color:white;
+display:block;
+             }
+			 #div2
+			 {
+			 position: absolute;
+			 top:200px;
+			 left:500px;
+			 height:500px;
+			 width:300px;
+			 border:solid 2px blue;
+			 background-color:white;
+			 text-align:center;
+			 font-weight:bold;
+			 color:white;
+			 display:block;
+			 }
+        </style>
+        <script>
+            function start()
+            {
+                if(document.forms["myform"]["a1"].value!="")
+                    {
+                        document.getElementById("div1").style.position=document.forms["myform"]["a1"].value;
+                    }
+                if(document.forms["myform"]["a2"].value!="")
+                    {
+                        document.getElementById("div1").style.top=document.forms["myform"]["a2"].value;
+                    }
+                if(document.forms["myform"]["a3"].value!="")
+                    {
+                        document.getElementById("div1").style.left=document.forms["myform"]["a3"].value;
+                    }
+                if(document.forms["myform"]["a4"].value!="")
+                    {
+                        document.getElementById("div1").style.height=document.forms["myform"]["a4"].value;
+                    }
+                if(document.forms["myform"]["a5"].value!="")
+                    {
+                        document.getElementById("div1").style.width=document.forms["myform"]["a5"].value;
+                    }
+                if(document.forms["myform"]["a6"].value!="")
+                    {
+                        document.getElementById("div1").style.border=document.forms["myform"]["a6"].value;
+                    }
+                if(document.forms["myform"]["a7"].value!="")
+                    {
+                        document.getElementById("div1").style.backgroundColor=document.forms["myform"]["a7"].value;
+                    }
+                if(document.forms["myform"]["a8"].value!="")
+                    {
+                        document.getElementById("div1").style.color=document.forms["myform"]["a8"].value;
+                    }
+                
+                if(document.forms["myform"]["b1"].value!="")
+                    {
+                        document.getElementById("div2").style.position=document.forms["myform"]["b1"].value;
+                    }
+                if(document.forms["myform"]["b2"].value!="")
+                    {
+                        document.getElementById("div2").style.top=document.forms["myform"]["b2"].value;
+                    }
+                if(document.forms["myform"]["b3"].value!="")
+                    {
+                        document.getElementById("div2").style.left=document.forms["myform"]["b3"].value;
+                    }
+                if(document.forms["myform"]["b4"].value!="")
+                    {
+                        document.getElementById("div2").style.height=document.forms["myform"]["b4"].value;
+                    }
+                if(document.forms["myform"]["b5"].value!="")
+                    {
+                        document.getElementById("div2").style.width=document.forms["myform"]["b5"].value;
+                    }
+                if(document.forms["myform"]["b6"].value!="")
+                    {
+                        document.getElementById("div2").style.border=document.forms["myform"]["b6"].value;
+                    }
+                if(document.forms["myform"]["b7"].value!="")
+                    {
+                        document.getElementById("div2").style.backgroundColor=document.forms["myform"]["b7"].value;
+                    }
+                if(document.forms["myform"]["b8"].value!="")
+                    {
+                        document.getElementById("div2").style.color=document.forms["myform"]["b8"].value;
+                    }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="div1" >DIV 1</div>
+        <div id="div2">DIV 2</div>
+        <form name="myform" id="form1">
+            <br>DIV1, DIV2<br><br>
+            Position: <br><input type="text" id="a1"><input type="text" id="b1"><br>
+            Top(add "px"): <br><input type="text" id="a2"><input type="text" id="b2"><br>
+            Left(add "px"): <br><input type="text" id="a3"><input type="text" id="b3"><br>
+            Height(add "px"): <br><input type="text" id="a4"><input type="text" id="b4"><br>
+            Width(add "px"): <br><input type="text" id="a5"><input type="text" id="b5"><br>
+            Border: <br><input type="text" id="a6"><input type="text" id="b6"><br>
+            Background-color: <br><input type="text" id="a7"><input type="text" id="b7"><br>
+            Color: <br><input type="text" id="a8"><input type="text" id="b8"><br><br>
+        </form>
+            <button id="button" onClick="start()">OK</button>
+        
+    </body>
+</html>
