@@ -1,0 +1,172 @@
+<!DOCTYPE HTML5>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kulka</title>
+        <link rel="icon" href ="graphics/icon.ico" type="image/x-icon">
+    <style>
+	  :root 
+	{
+ 	 --clr-neon: hsl(325 21% 56%);
+	  --clr-bg: hsl(323 21% 16%);
+ 	 --clr-bgkk: hsl(323 31% 26%);
+	}
+          body
+        {
+            background: var(--clr-bg);
+
+  color: var(--clr-neon);
+        }
+        #i1
+        {
+            position: absolute;
+            top:-200px;
+            left:-200px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            background-color: black;
+        }
+        #a1
+        {
+            position:absolute;
+            left: 200px;
+            bottom: 0;
+            width: 300px;
+            height: 20px;
+            background-color: white;
+        }
+        #wynik
+        {
+            float: right;
+            top:2px;
+            left:2px;
+            text-align: center;
+            font-weight: bold;
+            padding: 5px;
+            color: white;
+        }
+        #messagecontainer
+            {
+                width: 100%;
+                height: 20%;
+                position: absolute;
+                top: 30%;
+                left: 0;
+                background-color:#7b0745;
+                text-align: center;
+                font-size: 40px;
+                font-weight: bold;
+                padding-top: 20px;
+                z-index: 2;
+                color: red;
+            }
+        #x
+            {
+                position: absolute;
+                top: 100px;
+                left: 45%;
+                border-radius: 3px;
+                width: 10%;
+                height: 15%;
+                transition-duration: 0.2s;
+            }
+        
+        #start
+            {
+                position: absolute;
+                top: 400px;
+                left: 45%;
+                border: solid 2px red;
+                background-color: white;
+                color: black;
+                border-radius: 3px;
+                font-weight: bold;
+                font-size: 20px;
+                padding: 10px;
+                transition-duration: 0.2s;
+            }
+        
+    </style>
+    <script type="text/javascript">
+		var xx,id1,xz,k=1,l=1,w=0;
+        function StartA()
+		{
+            k=1,l=1,w=0;
+            document.getElementById("wynik").innerHTML="Wynik: "+w;
+            document.getElementById("start").style.display="none";
+            document.addEventListener('keydown', keyDown);
+			xx=document.documentElement.clientWidth-101;
+            xz=document.documentElement.clientHeight-101;
+            i1.style.left=xx+"px";
+            i1.style.top=xz+"px";
+            id1=setInterval("gs()",30);
+		}
+        function gs()
+        {
+            xx-=(10*k);xz-=(10*l);
+            if(xx<0) k=-1;
+            if(xz<0) l=-1;
+            if(xx>(document.documentElement.clientWidth-110)) k=1;
+            if(xz>(document.documentElement.clientHeight-110))
+            {
+                if((i1.offsetTop+100)>=a1.offsetTop && (i1.offsetLeft+50)>=a1.offsetLeft && (i1.offsetLeft+50)<=(a1.offsetLeft+300))
+                    {
+                        l=1;
+                        w+=1;
+                        document.getElementById("wynik").innerHTML="Wynik: "+w;
+                    }
+                else
+                    {
+                        document.getElementById("messagecontainer").style.display="block";
+                        document.getElementById("messagecontainer").innerHTML="Twój wynik to "+w+"! <button id='x' onClick='zamknij()'>Zagraj ponownie</button>";
+                        clearInterval(id1);
+                    }
+            }
+            i1.style.left=xx+"px";
+            i1.style.top=xz+"px";
+        }
+        var x=200,stepSize=20;
+        function keyDown(e)
+        {
+            if(e.keyCode === 37)
+                {
+                    if(x<=30)
+                        {
+                            x=30;
+                        }
+                    else
+                        {
+                            x-=stepSize;
+                        }
+                }
+            if(e.keyCode === 39)
+                {
+                    if(x>=(document.documentElement.clientWidth-330))
+                        {
+                            x=document.documentElement.clientWidth-330;
+                        }
+                    else
+                        {
+                            x+=stepSize;
+                        }
+                }
+            a1.style.left=x+"px";
+        }
+        function zamknij()
+            {
+                StartA();
+                document.getElementById("messagecontainer").style.display="none";
+            }
+    </script>
+ </head>
+<body onload="">
+    <div id="start" onClick="StartA()" style="display:block;">Start</div>
+    <div id="i1"></div>
+    <div id="a1"></div>
+    <div id="wynik">Wynik: 0</div>
+    <div id="messagecontainer" style="display:none;"></div>
+</body>
+
+</html>
