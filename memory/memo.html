@@ -1,0 +1,238 @@
+<!DOCTYPE HTML5>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Memory</title>
+        <link rel="icon" href ="graphics/icon.ico" type="image/x-icon">
+    <style>
+        body
+        {
+            background-color: maroon;
+        }
+        div 
+        {
+            position:absolute;
+        }
+        .obraz 
+        {
+            border:blue 1px solid; 
+            top:50px; 
+            height:100px;
+            width:100px;
+            background-color: white;
+        }
+       
+        img 
+        {
+            height:100px; 
+            width:100px;
+        }
+       
+        
+        #container
+        {
+            width: 1200px;
+            height: 600px;
+            margin-left:auto:
+            margin-right:auto;
+            top: 150px;
+            left: 400px;
+            
+        }
+        #x
+        {
+            position: absolute;
+            top: 100px;
+            left: 45%;
+            border-radius: 3px;
+            width: 10%;
+            height: 15%;
+            transition-duration: 0.2s;
+        }
+       
+        #x2
+        {
+            position: absolute;
+            top: 300px;
+            left: 700px;
+            border-radius: 3px;
+            width: 100px;
+            height: 30px;
+            transition-duration: 0.2s;
+        }
+      
+        #Wynikk
+        {
+            top: 200px; 
+            left: 700px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #messagecontainer
+            {
+            width: 100%;
+            height: 20%;
+            position:absolute;
+            top: 30%;
+            left: 0;
+            background-color:white;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            padding-top: 20px;
+            z-index: 2;
+            color: black;
+        }
+    </style>
+    <script type="text/javascript">
+        var Ruch=1;
+        var Wynik=0;
+        var oba="";
+        var obb="";
+        var lastclicked="";
+        var Id=['a1','a2','a3','a4','a5','a6','a7','a8','a9','a10','a11','a12','a13','a14','a15','a16','a17','a18','a19','a20'];
+        var Img=['jeden','dwa','trzy','cz','piec','szesc','siedem','osiem','dziew','dz','jeden','dwa','trzy','cz','piec','szesc','siedem','osiem','dziew','dz'];
+        
+        function zakryj(){
+            for (var i=0;i<20;i++)
+            {
+                document.getElementById(Id[i]).innerHTML="<img src='hide.jpg'>";
+            }
+        }
+        
+        function nowa(){
+            for (var i=0;i<20;i++)
+            {
+                document.getElementById(Id[i]).style.display="block";
+            }
+        }
+
+        function odkryj(x){
+            for (var i=0;i<20;i++)
+                {
+                    if (x==document.getElementById(Id[i]))
+                    {
+                        if(lastclicked==Id[i])
+                            {
+                                
+                            }
+                        else
+                            {
+                                x.innerHTML="<img src='"+Img[i]+".jpg'>";
+                                if(Ruch==1)
+                                    {
+                                        oba=Img[i];
+                                        Ruch=2;
+                                    }
+                                else if(Ruch==2)
+                                    {
+                                        obb=Img[i];
+                                        if(oba==obb)
+                                            {
+                                                Wynik=Wynik+1;
+                                                if(Wynik==10)
+                                                    {
+                                                        document.getElementById("Wynikk").innerHTML="Wynik = "+Wynik;
+                                                        document.getElementById(Id[i]).style.display="none";
+                                                        document.getElementById(lastclicked).style.display="none";
+                                                        document.getElementById("messagecontainer").style.display="block";
+                                                        document.getElementById("messagecontainer").innerHTML="Wygrywasz! <button id='x' onClick='nowa();zakryj();mieszaj();zamknij()'>Zamknij</button>";
+                                                    }
+                                                else
+                                                    {
+                                                        Ruch=1;
+                                                        document.getElementById("Wynikk").innerHTML="Wynik = "+Wynik;
+                                                        document.getElementById(Id[i]).style.display="none";
+                                                        document.getElementById(lastclicked).style.display="none";
+                                                    }
+                                            }
+                                        else
+                                            {
+                                                setTimeout(function(){ zakryj(); }, 1000);
+                                                Ruch=1;
+                                            }
+                                    }
+                            }
+                        lastclicked=Id[i];
+                    }
+                }
+        }
+        var Pos=[[50,50],[150,50],[250,50],[350,50],[450,50],[50,150],[150,150],[250,150],[350,150],[450,150],[50,250],[150,250],[250,250],[350,250],[450,250],[50,350],[150,350],[250,350],[350,350],[450,350]];
+            
+        function mieszaj(){
+            var i=0, x;
+            var Los=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+            while(i<20)
+            {
+                x=Math.floor(Math.random()*20);
+                if(Los[x]==1)
+                {
+                document.getElementById(Id[i]).style.left=Pos[x][0]+'px';
+                document.getElementById(Id[i]).style.top=Pos[x][1]+'px';
+                i++;    
+                Los[x]=0;
+                }
+            }
+            Ruch=1;
+            Wynik=0;
+            oba="";
+            obb="";
+            document.getElementById("Wynikk").innerHTML="Wynik = "+Wynik;
+        }
+        function zamknij()
+        {
+            document.getElementById("messagecontainer").style.display="none";
+        }
+    </script>
+ </head>
+<body onload="nowa();zakryj();mieszaj()">
+    <div id="container">
+    <div id="a1" class="obraz" style="display:block;left:50px;top:50px"  onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a2" class="obraz" style="display:block;left:150px;top:50px;" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a3" class="obraz" style="display:block;left:250px;top:50px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a4" class="obraz" style="display:block;left:350px;top:50px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a5" class="obraz" style="display:block;left:450px;top:50px"  onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a6" class="obraz" style="display:block;left:50px;top:150px;" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a7" class="obraz" style="display:block;left:150px;top:150px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a8" class="obraz" style="display:block;left:250px;top:150px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a9" class="obraz" style="display:block;left:350px;top:150px"  onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a10" class="obraz" style="display:block;left:450px;top:150px;" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a11" class="obraz" style="display:block;left:50px;top:250px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a12" class="obraz" style="display:block;left:150px;top:250px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a13" class="obraz" style="display:block;left:250px;top:250px"  onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a14" class="obraz" style="display:block;left:350px;top:250px;" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a15" class="obraz" style="display:block;left:450px;top:250px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a16" class="obraz" style="display:block;left:50px;top:350px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a17" class="obraz" style="display:block;left:150px;top:350px"  onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a18" class="obraz" style="display:block;left:250px;top:350px;" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a19" class="obraz" style="display:block;left:350px;top:350px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="a20" class="obraz" style="display:block;left:450px;top:350px" onclick="odkryj(this)">
+        <img src="hide.jpg"></div>
+    <div id="Wynikk">Wynik = 0</div>
+    <button id="x2" onclick="nowa();zakryj();mieszaj()">reset</button>
+    </div>
+    <div id="messagecontainer" style="display:none;"></div>
+    
+</body>
+
+</html>
